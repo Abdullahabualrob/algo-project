@@ -52,3 +52,10 @@ def generate_array(size, order='random'):
         half = size // 2
         return sorted(arr[:half]) + arr[half:]
     return arr
+import time
+
+def measure_time(sort_function, arr):
+    start = time.time()
+    sort_function(arr.copy())
+    end = time.time()
+    return (end - start) * 1000  # بالميلي ثانية
