@@ -58,4 +58,28 @@ def measure_time(sort_function, arr):
     start = time.time()
     sort_function(arr.copy())
     end = time.time()
-    return (end - start) * 1000  # بالميلي ثانية
+    return (end - start) * 1000  
+import matplotlib.pyplot as plt
+
+sizes = [100, 1000, 10000]
+orders = ['random', 'partial', 'reversed']
+algorithms = {
+    'Bubble Sort': bubble_sort,
+    'Merge Sort': merge_sort,
+    'Quick Sort': quick_sort
+}
+
+results = {}
+
+for order in orders:
+    results[order] = {}
+    for name, func in algorithms.items():
+        results[order][name] = []
+        for size in sizes:
+            times = []
+            for _ in range(5):  
+                arr = generate_array(size, order)
+                exec_time = measure_time(func, arr)
+                times.append(exec_time)
+            avg_time = sum(times) / len(times)
+            results[order][name].append(avg_time)
