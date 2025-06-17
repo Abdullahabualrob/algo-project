@@ -40,3 +40,15 @@ def quick_sort(arr):
         equal = [x for x in arr if x == pivot]
         greater = [x for x in arr[1:] if x > pivot]
         return quick_sort(less) + equal + quick_sort(greater)
+import random
+
+def generate_array(size, order='random'):
+    arr = [random.randint(0, 10000) for _ in range(size)]
+    if order == 'sorted':
+        return sorted(arr)
+    elif order == 'reversed':
+        return sorted(arr, reverse=True)
+    elif order == 'partial':
+        half = size // 2
+        return sorted(arr[:half]) + arr[half:]
+    return arr
